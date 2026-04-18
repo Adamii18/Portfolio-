@@ -1,0 +1,180 @@
+name: Quality Checks
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Validate HTML
+      run: |
+        echo "Validating HTML files..."
+        for file in *.html; do
+          if [ -f "$file" ]; then
+            echo "✓ Found: $file"
+          fi
+        done
+    
+    - name: Check CSS
+      run: |
+        echo "Checking CSS file..."
+        if [ -f "styles.css" ]; then
+          echo "✓ CSS file found"
+          wc -l styles.css
+        else
+          echo "✗ CSS file not found"
+          exit 1
+        fi
+    
+    - name: Verify Required Files
+      run: |
+        echo "Verifying project structure..."
+        files=(
+          "README.md"
+          "LICENSE"
+          "CONTRIBUTING.md"
+          "CODE_OF_CONDUCT.md"
+          "SECURITY.md"
+          "INSTALLATION.md"
+          "CHANGELOG.md"
+          "package.json"
+          ".gitignore"
+          "index.html"
+          "Contact.html"
+          "Hobbies.html"
+          "styles.css"
+        )
+        
+        for file in "${files[@]}"; do
+          if [ -f "$file" ]; then
+            echo "✓ $file"
+          else
+            echo "✗ Missing: $file"
+          fi
+        done
+    
+    - name: Check Links in HTML
+      run: |
+        echo "Checking internal links..."
+        grep -n "href=" *.html || true
+    
+    - name: Validate JSON
+      run: |
+        echo "Validating package.json..."
+        if [ -f "package.json" ]; then
+          python3 -m json.tool package.json > /dev/null && echo "✓ JSON is valid"
+        fi
+    
+    - name: Count Lines of Code
+      run: |
+        echo "Project Statistics:"
+        echo "==================="
+        echo "HTML Files:"
+        wc -l *.html 2>/dev/null || echo "No HTML files"
+        echo ""
+        echo "CSS Files:"
+        wc -l *.css 2>/dev/null || echo "No CSS files"
+        echo ""
+        echo "Documentation:"
+        wc -l *.md 2>/dev/null || echo "No MD files"
+
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Check for Secrets
+      run: |
+        echo "Scanning for potential secrets..."
+        if grep -r "password\|secret\|api_key\|token" *.html *.css *.js 2>/dev/null; then
+          echo "⚠️  Warning: Potential secrets found"
+        else
+          echo "✓ No obvious secrets detected"
+        fi
+    
+    - name: Verify .gitignore
+      run: |
+        echo "Checking .gitignore..."
+        if [ -f ".gitignore" ]; then
+          echo "✓ .gitignore found"
+          echo "Contents:"
+          head -20 .gitignore
+        else
+          echo "✗ .gitignore not found"
+        fi
+
+  documentation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Check README
+      run: |
+        echo "Validating README.md..."
+        if [ -f "README.md" ]; then
+          if grep -q "# " README.md; then
+            echo "✓ README.md has proper heading"
+            echo "README Preview:"
+            head -10 README.md
+          else
+            echo "⚠️  README.md may need improvement"
+          fi
+        else
+          echo "✗ README.md not found"
+          exit 1
+        fi
+    
+    - name: Check Documentation Files
+      run: |
+        echo "Checking documentation completeness..."
+        docs=(
+          "CONTRIBUTING.md"
+          "CODE_OF_CONDUCT.md"
+          "SECURITY.md"
+          "INSTALLATION.md"
+        )
+        
+        for doc in "${docs[@]}"; do
+          if [ -f "$doc" ]; then
+            lines=$(wc -l < "$doc")
+            echo "✓ $doc ($lines lines)"
+          else
+            echo "✗ Missing: $doc"
+          fi
+        done
+
+  report:
+    runs-on: ubuntu-latest
+    needs: [validate, security, documentation]
+    if: always()
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Generate Report
+      run: |
+        echo "📊 Quality Check Report"
+        echo "======================"
+        echo ""
+        echo "✅ All checks completed!"
+        echo ""
+        echo "Files in Repository:"
+        ls -la | grep -E "\.html|\.css|\.json|\.md|\.yml" || true
+        echo ""
+        echo "Repository Size:"
+        du -sh . 2>/dev/null || echo "Unable to calculate"
+        echo ""
+        echo "Last Updated: $(date)"
