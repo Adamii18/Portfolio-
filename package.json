@@ -1,0 +1,45 @@
+{
+  "name": "jaidatech-ventures",
+  "version": "1.0.0",
+  "description": "A professional portfolio showcasing expertise in data analysis and web development",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'Build script placeholder'",
+    "test": "echo 'Test script placeholder'",
+    "lint": "echo 'Lint script placeholder'"
+  },
+  "keywords": [
+    "portfolio",
+    "data-analysis",
+    "web-development",
+    "personal-website",
+    "jaidatech"
+  ],
+  "author": {
+    "name": "Adam II",
+    "email": "adamishaqisah@gmail.com",
+    "url": "https://github.com/Adamii18"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Adamii18/Jaidatech-.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Adamii18/Jaidatech-/issues"
+  },
+  "homepage": "https://github.com/Adamii18/Jaidatech-#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "keywords": [
+    "portfolio",
+    "data-analysis",
+    "web-development",
+    "personal-website"
+  ]
+}
