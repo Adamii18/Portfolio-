@@ -1,164 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Adam II's Hobbies and Interests - Personal passion projects and activities">
-        <meta name="keywords" content="hobbies, interests, personal, passions, jaidatech">
-        <meta name="author" content="Adam II">
-        <title>My Hobbies - Adam II Portfolio</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <header>
-            <h1>🎮 My Hobbies & Interests</h1>
-            <p>Exploring my passions beyond work</p>
-        </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Adam II's Hobbies and Interests - Personal passion projects and activities">
+  <meta name="keywords" content="hobbies, interests, personal, passions, jaidatech">
+  <meta name="author" content="Adam II">
+  <title>My Hobbies — Adam II Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #0a0d14;
+      --surface:   #111520;
+      --card:      #161c2d;
+      --border:    #1f2a40;
+      --accent:    #f0a500;
+      --accent2:   #e06030;
+      --text:      #e8eaf0;
+      --muted:     #7a8099;
+      --green:     #2dca8c;
+      --radius:    14px;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
 
-        <main>
-            <section>
-                <h3>About My Interests</h3>
-                <p>Beyond my professional life as a Data Analyst and Web Developer, I have a diverse range of interests that keep me engaged and motivated. Here are some of my favorite hobbies and activities.</p>
-            </section>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-            <hr>
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
 
-            <section>
-                <h3>💻 Technology & Coding</h3>
-                <p>I'm passionate about technology and love exploring new programming languages and frameworks. From web development to data analysis, I'm constantly learning and building new projects.</p>
-                <ul>
-                    <li>Building web applications</li>
-                    <li>Data visualization projects</li>
-                    <li>Mobile app development</li>
-                    <li>Open source contributions</li>
-                </ul>
-            </section>
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
 
-            <hr>
+    a { color: var(--accent); text-decoration: none; transition: opacity .2s; }
+    a:hover { opacity: .75; }
 
-            <section>
-                <h3>📚 Reading & Learning</h3>
-                <p>I believe in continuous learning. I spend time reading books, articles, and technical documentation to stay updated with industry trends.</p>
-                <ul>
-                    <li>Technical books and guides</li>
-                    <li>Tech blogs and Medium articles</li>
-                    <li>Online courses and certifications</li>
-                    <li>Industry news and updates</li>
-                </ul>
-            </section>
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
 
-            <hr>
+    /* NAV */
+    nav {
+      position: sticky; top: 0;
+      background: rgba(10,13,20,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100; padding: 14px 0;
+    }
+    nav .wrapper { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .nav-brand { font-family: var(--font-head); font-size: 1.1rem; font-weight: 800; letter-spacing: -.02em; color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .88rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-            <section>
-                <h3>🎨 Creative Projects</h3>
-                <p>I enjoy working on creative projects that combine design and functionality. Whether it's UI/UX design or web design, I love bringing ideas to life.</p>
-                <ul>
-                    <li>UI/UX Design</li>
-                    <li>Web Design</li>
-                    <li>Graphic Design</li>
-                    <li>Digital Art</li>
-                </ul>
-            </section>
+    /* PAGE HERO */
+    .page-hero { padding: 64px 0 48px; border-bottom: 1px solid var(--border); margin-bottom: 56px; }
+    .section-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); margin-bottom: 8px; }
+    .page-hero h1 { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: 12px; }
+    .page-hero p { color: var(--muted); font-size: 1rem; max-width: 520px; }
+    .section-title { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 24px; }
+    .divider { height: 1px; background: var(--border); margin: 52px 0; }
 
-            <hr>
+    /* HOBBIES GRID */
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
 
-            <section>
-                <h3>📊 Data Analysis</h3>
-                <p>I'm fascinated by data and what it can reveal. I enjoy analyzing datasets and creating meaningful visualizations that tell compelling stories.</p>
-                <ul>
-                    <li>Data visualization</li>
-                    <li>Statistical analysis</li>
-                    <li>Business intelligence</li>
-                    <li>Data-driven decision making</li>
-                </ul>
-            </section>
+    .hobby-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 24px;
+      transition: border-color .25s, transform .25s;
+    }
+    .hobby-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .hobby-icon { font-size: 2rem; margin-bottom: 14px; }
+    .hobby-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .hobby-desc { color: var(--muted); font-size: .86rem; line-height: 1.6; margin-bottom: 14px; }
+    .hobby-items { display: flex; flex-direction: column; gap: 6px; }
+    .hobby-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .83rem;
+      color: var(--muted);
+    }
+    .hobby-item::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
 
-            <hr>
+    /* GOALS TABLE → GRID */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
 
-            <section>
-                <h3>🌍 Networking & Community</h3>
-                <p>I value connecting with other professionals and contributing to the tech community. I enjoy attending meetups, conferences, and collaborating on projects.</p>
-                <ul>
-                    <li>Tech meetups and events</li>
-                    <li>Community involvement</li>
-                    <li>Mentoring others</li>
-                    <li>Collaborating on projects</li>
-                </ul>
-            </section>
+    .goal-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color .25s;
+    }
+    .goal-card:hover { border-color: var(--accent); }
 
-            <hr>
+    .goal-title { font-family: var(--font-head); font-weight: 700; font-size: .95rem; }
+    .goal-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
-            <section>
-                <h3>🏆 Goals & Aspirations</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Goal</th>
-                            <th>Target Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Build 5 full-stack applications</td>
-                            <td>2026</td>
-                            <td>In Progress</td>
-                        </tr>
-                        <tr>
-                            <td>Contribute to open source projects</td>
-                            <td>2026</td>
-                            <td>In Progress</td>
-                        </tr>
-                        <tr>
-                            <td>Complete advanced certifications</td>
-                            <td>2027</td>
-                            <td>Planned</td>
-                        </tr>
-                        <tr>
-                            <td>Start a tech blog</td>
-                            <td>2026</td>
-                            <td>Planned</td>
-                        </tr>
-                        <tr>
-                            <td>Mentor junior developers</td>
-                            <td>2027</td>
-                            <td>Planned</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+    .goal-year {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
 
-            <hr>
+    .status-badge {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .status-progress { background: rgba(240,165,0,.1); color: var(--accent); border: 1px solid rgba(240,165,0,.3); }
+    .status-planned  { background: rgba(45,202,140,.08); color: var(--green);  border: 1px solid rgba(45,202,140,.25); }
 
-            <section>
-                <h3>🎯 Fun Facts</h3>
-                <ul>
-                    <li>I 💗 Coding - It's my favorite hobby!</li>
-                    <li>I'm always exploring new technologies</li>
-                    <li>I believe in continuous self-improvement</li>
-                    <li>I love collaborative projects and teamwork</li>
-                    <li>I'm passionate about creating elegant solutions</li>
-                </ul>
-            </section>
+    /* FUN FACTS */
+    .facts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .fact-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 20px;
+      font-size: .92rem;
+      color: var(--muted);
+      transition: border-color .2s;
+    }
+    .fact-item:hover { border-color: var(--accent); color: var(--text); }
 
-            <hr>
+    /* CTA BANNER */
+    .cta-banner {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      text-align: center;
+    }
+    .cta-banner h3 { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+    .cta-banner p { color: var(--muted); margin-bottom: 24px; font-size: .92rem; }
 
-            <section style="text-align: center; background-color: #ecf0f1; padding: 20px; border-radius: 8px;">
-                <h3>Let's Connect!</h3>
-                <p>If you share any of these interests, I'd love to connect and collaborate!</p>
-                <a href="Contact.html" class="btn">📧 Get in Touch</a>
-            </section>
+    /* BUTTONS */
+    .btn-primary { display: inline-block; background: var(--accent); color: #0a0d14; font-family: var(--font-body); font-weight: 700; font-size: .9rem; padding: 12px 26px; border-radius: 8px; border: none; cursor: pointer; transition: transform .2s, box-shadow .2s; letter-spacing: .02em; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,165,0,.35); color: #0a0d14; opacity: 1; }
+    .btn-ghost { display: inline-block; border: 1px solid var(--border); color: var(--text); font-family: var(--font-body); font-size: .9rem; font-weight: 500; padding: 12px 24px; border-radius: 8px; transition: border-color .2s, background .2s; cursor: pointer; background: transparent; }
+    .btn-ghost:hover { border-color: var(--accent); background: rgba(240,165,0,.06); color: var(--text); opacity: 1; }
+    .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-            <hr>
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 36px 0; margin-top: 64px; color: var(--muted); font-size: .83rem; }
+    footer .wrapper { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  </style>
+</head>
+<body>
 
-            <section style="text-align: center;">
-                <a href="index.html" class="btn">← Back to Home</a>
-            </section>
-        </main>
+  <nav>
+    <div class="wrapper">
+      <a href="index.html" class="nav-brand">Adam II ✦</a>
+      <ul class="nav-links">
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-        <footer>
-            <p>&copy; 2026 Adam II - Jaidatech Ventures. All rights reserved.</p>
-            <p>Licensed under the <a href="LICENSE">MIT License</a></p>
-        </footer>
-    </body>
+  <div class="wrapper">
+    <div class="page-hero">
+      <p class="section-label">Beyond the code</p>
+      <h1>🎮 My Hobbies & Interests</h1>
+      <p>Exploring my passions outside of work — the activities and pursuits that keep me curious, creative, and driven.</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrapper">
+
+      <!-- HOBBIES -->
+      <p class="section-label">What I enjoy</p>
+      <h2 class="section-title">My Interests</h2>
+      <div class="hobbies-grid">
+
+        <div class="hobby-card">
+          <div class="hobby-icon">🤖</div>
+          <div class="hobby-title">AI & Emerging Tech</div>
+          <div class="hobby-desc">I'm fascinated by how AI is reshaping the world. I explore new models, tools, and use cases — and teach them to Hausa-speaking audiences on YouTube.</div>
+          <div class="hobby-items">
+            <div class="hobby-item">Building AI chatbots & assistants</div>
+            <div class="hobby-item">Testing LLM APIs (Groq, Anthropic)</div>
+            <div class="hobby-item">Creating AI education content</div>
+          </div>
+        </div>
+
+        <div class="hobby-card">
+          <div class="hobby-icon">💻</div>
+          <div class="hobby-title">Coding & Development</div>
+          <div class="hobby-desc">Writing code is more than a job — it's a hobby. From Python scripts to web apps, I build things just to see what's possible.</div>
+          <div class="hobby-items">
+            <div class="hobby-item">Python & Flask projects</div>
+            <div class="hobby-item">Frontend UI experiments</div>
+            <div class="hobby-item">Open source contributions</div>
+          </div>
+        </div>
+
+        <div class="hobby-card">
+          <div class="hobby-icon">📚</div>
+          <div class="hobby-title">Reading & Learning</div>
+          <div class="hobby-desc">Continuous learning is a core value for me. I stay updated through books, courses, and tech content — always adding new tools to my skill set.</div>
+          <div class="hobby-items">
+            <div class="hobby-item">Technical books & guides</div>
+            <div class="hobby-item">Online certifications</div>
+            <div class="hobby-item">Tech blogs & documentation</div>
+          </div>
+        </div>
+
+        <div class="hobby-card">
+          <div class="hobby-icon">📊</div>
+          <div class="hobby-title">Data & Analytics</div>
+          <div class="hobby-desc">I love finding patterns in data. Turning raw numbers into clear, meaningful insights is something I genuinely enjoy doing.</div>
+          <div class="hobby-items">
+            <div class="hobby-item">Data visualisation</div>
+            <div class="hobby-item">Statistical analysis</div>
+            <div class="hobby-item">Data-driven storytelling</div>
+          </div>
+        </div>
+
+        <div class="hobby-card">
+          <div class="hobby-icon">🎨</div>
+          <div class="hobby-title">Design & Creativity</div>
+          <div class="hobby-desc">I enjoy designing interfaces that are both functional and beautiful. Good design and good code go hand in hand for me.</div>
+          <div class="hobby-items">
+            <div class="hobby-item">UI/UX design</div>
+            <div class="hobby-item">Web design & layout</div>
+            <div class="hobby-item">Visual content creation</div>
+          </div>
+        </div>
+
+        <div class="hobby-card">
+          <div class="hobby-icon">🌍</div>
+          <div class="hobby-title">Community & Networking</div>
+          <div class="hobby-desc">I believe in sharing knowledge and lifting others up. I enjoy mentoring, collaborating, and growing with the tech community in Nigeria and beyond.</div>
+          <div class="hobby-items">
+            <div class="hobby-item">Mentoring junior developers</div>
+            <div class="hobby-item">Tech community involvement</div>
+            <div class="hobby-item">Collaborative projects</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- GOALS -->
+      <div class="divider"></div>
+      <p class="section-label">What's ahead</p>
+      <h2 class="section-title">🏆 Goals & Aspirations</h2>
+      <div class="goals-grid">
+
+        <div class="goal-card">
+          <div class="goal-title">Build 5 full-stack applications</div>
+          <div class="goal-meta">
+            <span class="goal-year">2026</span>
+            <span class="status-badge status-progress">In Progress</span>
+          </div>
+        </div>
+
+        <div class="goal-card">
+          <div class="goal-title">Contribute to open source projects</div>
+          <div class="goal-meta">
+            <span class="goal-year">2026</span>
+            <span class="status-badge status-progress">In Progress</span>
+          </div>
+        </div>
+
+        <div class="goal-card">
+          <div class="goal-title">Become Nigeria's #1 Hausa AI content creator</div>
+          <div class="goal-meta">
+            <span class="goal-year">2026</span>
+            <span class="status-badge status-progress">In Progress</span>
+          </div>
+        </div>
+
+        <div class="goal-card">
+          <div class="goal-title">Launch a tech blog in Hausa & English</div>
+          <div class="goal-meta">
+            <span class="goal-year">2026</span>
+            <span class="status-badge status-planned">Planned</span>
+          </div>
+        </div>
+
+        <div class="goal-card">
+          <div class="goal-title">Complete advanced AI/ML certifications</div>
+          <div class="goal-meta">
+            <span class="goal-year">2027</span>
+            <span class="status-badge status-planned">Planned</span>
+          </div>
+        </div>
+
+        <div class="goal-card">
+          <div class="goal-title">Mentor junior developers in Kaduna</div>
+          <div class="goal-meta">
+            <span class="goal-year">2027</span>
+            <span class="status-badge status-planned">Planned</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FUN FACTS -->
+      <div class="divider"></div>
+      <p class="section-label">A little about me</p>
+      <h2 class="section-title">🎯 Fun Facts</h2>
+      <div class="facts-list">
+        <div class="fact-item">I 💗 Coding — it's my favorite hobby and my career at the same time.</div>
+        <div class="fact-item">I'm building AI education content for Hausa-speaking audiences — a largely untapped audience of millions.</div>
+        <div class="fact-item">I went from tailoring specialist to AI chatbot developer — self-taught, step by step.</div>
+        <div class="fact-item">I work across Android (Pydroid 3, Acode) and Windows PC — coding anywhere, anytime.</div>
+        <div class="fact-item">I believe elegant code and elegant design are the same thing — both need intention.</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="divider"></div>
+      <div class="cta-banner">
+        <h3>Let's Connect!</h3>
+        <p>If you share any of these interests, I'd love to collaborate, learn together, or just say hello.</p>
+        <div class="btn-row">
+          <a href="Contact.html" class="btn-primary">📧 Get in Touch</a>
+          <a href="index.html" class="btn-ghost">← Back to Home</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrapper">
+      <span>© 2026 Adam II · Jaidatech Ventures. All rights reserved.</span>
+      <span>Licensed under the <a href="LICENSE">MIT License</a></span>
+    </div>
+  </footer>
+
+</body>
 </html>
